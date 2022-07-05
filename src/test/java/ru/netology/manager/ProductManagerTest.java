@@ -14,6 +14,8 @@ public class ProductManagerTest {
     Product product2 = new Product(2, "Nokia", 102);
     Product product3 = new Product(7, "Кочевник", 30);
     Product product4 = new Product(101, "Samsung", 400);
+    Product product5 = new Product(10, "Nokia", 40);
+
 
     ProductRepository repo = new ProductRepository();
     ProductManager manager = new ProductManager(repo);
@@ -41,6 +43,18 @@ public class ProductManagerTest {
 
         Product[] expected = {product2};
         Product[] actual = manager.searchBy("Nokia");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+    @Test
+    public void shouldSearchByNonExistentText() {
+
+        manager.add(product1);
+        manager.add(product2);
+        manager.add(product3);
+
+        Product[] expected = {};
+        Product[] actual = manager.searchBy("Колобок");
 
         Assertions.assertArrayEquals(expected, actual);
     }

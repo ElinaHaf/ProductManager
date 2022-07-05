@@ -30,6 +30,7 @@ public class ProductManager {
                 Product[] tmp = new Product[result.length + 1];
                 tmp[tmp.length - 1] = product;
                 result = tmp;
+
             }
         }
         return result;
