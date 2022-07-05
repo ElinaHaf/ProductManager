@@ -58,6 +58,20 @@ public class ProductManagerTest {
 
         Assertions.assertArrayEquals(expected, actual);
     }
+    @Test
+    public void shouldSearchBySimilarProduct() {
+
+        manager.add(product1);
+        manager.add(product2);
+        manager.add(product3);
+        manager.add(product5);
+
+
+        Product[] expected = {product2, product5};
+        Product[] actual = manager.searchBy("Nokia");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
 
 }
 
