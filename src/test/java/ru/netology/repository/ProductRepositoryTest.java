@@ -3,6 +3,8 @@ package ru.netology.repository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.netology.domein.Product;
+import ru.netology.exceptions.NotFoundException;
+
 
 public class ProductRepositoryTest {
 
@@ -56,5 +58,34 @@ public class ProductRepositoryTest {
 
         Assertions.assertArrayEquals(expected, actual);
     }
+    @Test
+    public void shouldRemoveById() {
+        ProductRepository repo = new ProductRepository();
+        repo.save(product1);
+        repo.save(product2);
+        repo.save(product3);
+
+        repo.removeById(2);
+
+        Product[] expected = {product1, product3};
+        Product[] actual = repo.getFindAll();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldRemoveByIdWithException() {
+        ProductRepository repo = new ProductRepository();
+
+        repo.save(product1);
+        repo.save(product2);
+        repo.save(product3);
+
+        Assertions.assertThrows(NotFoundException.class, () -> {
+            repo.removeById(17);
+        });
+
+    }
+
 
 }
